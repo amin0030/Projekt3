@@ -1,0 +1,42 @@
+/* for HomePage */
+.home-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .home-container h1 {
+    margin-bottom: 30px;
+  }
+  
+  
+  .navigate-button {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    min-width: 150px;
+  }
+  
+  /* knapfarver */
+  .start-game-button {
+    background-color: #4CAF50; /* Grøn */
+  }
+  
+  .start-game-button:hover {
+    background-color: #388e3c; /* Mørkere grøn */
+  }
+  
+  .view-stats-button {
+    background-color: #f44336; /* Rød */
+  }
+  
+  .view-stats-button:hover {
+    background-color: #d32f2f; /* Mørkere rød */
+  }

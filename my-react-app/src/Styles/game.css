@@ -1,0 +1,67 @@
+/* Generelle stilarter for spillerform */
+.player-form {
+  background-color: #e0f7fa; /* Lyseblå baggrund for formular */
+  border: 2px solid #000; /* Sort kant rundt om formular */
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px; /* Let afrundede hjørner */
+}
+
+/* Input stilarter */
+.player-input, .balance-input, .bet-input, .bet-type-select {
+  padding: 8px 10px;
+  margin: 5px;
+  margin-bottom: 10px;
+  width: calc(100% - 22px); /* Aftrekker border og margin */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Knapper */
+.add-player-button, .bet-button, .view-active-bets-button {
+  background-color: #4caf50; /* Grøn baggrund for knapper */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Tilføjer skygge for dybde */
+}
+
+/* Knapper hover-effekt */
+.add-player-button:hover, .bet-button:hover, .view-active-bets-button:hover {
+  background-color: #388e3c; /* Mørkere grøn ved hover */
+}
+
+/* Stil til dropdown select */
+.bet-type-select {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Label stilarter */
+.label {
+  font-weight: bold; /* Gør teksten fed for labels */
+  display: block; /* Gør label til block-niveau, så det tager sin egen linje */
+  margin-bottom: 5px; /* Tilføjer lidt plads under label */
+}
+
+/* Juster layoutet af inputs og knapper for at passe bedre sammen */
+.player-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Tilpasser størrelsen på inputs og knapper på små skærme */
+@media (max-width: 768px) {
+  .player-input, .balance-input, .bet-input, .bet-type-select, .add-player-button, .bet-button, .view-active-bets-button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

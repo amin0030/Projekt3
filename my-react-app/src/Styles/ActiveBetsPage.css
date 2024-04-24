@@ -1,0 +1,67 @@
+/* ActiveBetsPage.css */
+.active-bets-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.active-bets-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.active-bets-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Added margin for better spacing below table */
+}
+
+.active-bets-table th,
+.active-bets-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center; /* Ensure content is centered for better readability */
+}
+
+.active-bets-table th {
+  background-color: #f2f2f2;
+}
+
+.active-bets-table td {
+  background-color: #fff; /* Optional: set a different background for cells */
+}
+
+.active-bets-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block; /* Make the button block to span the width of its container */
+  width: 100%; /* Full width for better mobile responsiveness */
+  margin-top: 10px; /* Added margin top for spacing */
+}
+
+.active-bets-button:hover {
+  background-color: #45a049;
+}
+
+.active-bets-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.active-bets-button:hover {
+  background-color: #45a049;
+}
