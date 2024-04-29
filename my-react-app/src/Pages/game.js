@@ -33,7 +33,11 @@ function Game() {
         if (betAmount > 0 && betAmount <= player.balance && player.betType) {
             const updatedPlayers = players.map((p, i) => {
                 if (i === index) {
-                    return { ...p, balance: p.balance - betAmount, currentBet: { betType: p.betType, betAmount: betAmount } };
+                    return { 
+                        ...p, 
+                        balance: p.balance - betAmount, 
+                        currentBet: { betType: p.betType, betAmount: betAmount } 
+                    };
                 }
                 return p;
             });
@@ -50,7 +54,7 @@ function Game() {
     return (
         <div className="game-container">
             <div className="left-panel">
-                <div className="game-started">Spillet er Started</div>
+                <div className="game-started">Spillet er startet</div>
                 <input
                     type="text"
                     value={newPlayerName}
@@ -65,10 +69,10 @@ function Game() {
                     placeholder="Indtast startsaldo"
                     className="balance-input"
                 />
-                <button onClick={addPlayer} className="add-player-button">Tilføj Player</button>
+                <button onClick={addPlayer} className="add-player-button">Tilføj spiller</button>
                 {players.map((player, index) => (
-                    <div key={index}>
-                        <div>{player.name} - Saldo: {player.balance.toFixed(2)}</div>
+                    <div key={index} className="player-info">
+                        <div>{player.name} - Saldo: {player.balance.toFixed(2)} DKK</div>
                         <input
                             type="number"
                             value={player.betAmount}
@@ -77,7 +81,8 @@ function Game() {
                                 updatedPlayers[index].betAmount = e.target.value;
                                 setPlayers(updatedPlayers);
                             }}
-                            placeholder="Bet Amount"
+                            placeholder="Beløb"
+                            className="bet-input"
                         />
                         <select
                             value={player.betType}
@@ -86,6 +91,7 @@ function Game() {
                                 updatedPlayers[index].betType = e.target.value;
                                 setPlayers(updatedPlayers);
                             }}
+                            className="bet-select"
                         >
                             <option value="">Vælg Bet Type</option>
                             <option value="Red">Rød</option>
@@ -94,14 +100,13 @@ function Game() {
                                 <option key={i} value={i + 1}>{i + 1}</option>
                             ))}
                         </select>
-                        <button onClick={() => placeBet(index)}>Tilføj Bet</button>
+                        <button onClick={() => placeBet(index)} className="place-bet-button">Placer bet</button>
                     </div>
                 ))}
-                <button onClick={navigateToActiveBets} className="view-active-bets-button"> Se Aktive Bets</button>
+                <button onClick={navigateToActiveBets} className="view-active-bets-button">Se aktive bets</button>
             </div>
         </div>
     );
 }
 
 export default Game;
-
