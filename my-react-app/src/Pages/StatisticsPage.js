@@ -1,70 +1,71 @@
 import React, { useState, useEffect } from 'react';
 
 function StatisticsPage() {
-  const [players, setPlayers] = useState([]);
-  const [winner, setWinner] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [games, setGames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchGameData = async () => {
-      try {
-        // Antag at '/api/game-data' er det rigtige endpoint
-        const response = await fetch('/api/game-data');
-        if (!response.ok) {
-          throw new Error('Netværksrespons var ikke ok');
-        }
-        const data = await response.json();
-        setPlayers(data.players);
-        setWinner(data.winner);
-        setLoading(false);
-      } catch (error) {
-        console.error('Fejl under hentning af spildata', error);
-        setError('Kunne ikke hente spildata.');
-        setLoading(false);
-      }
-    };
+    useEffect(() => {
+        const fetchGameData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/game-data');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                if (data.games) {
+                    setGames(data.games);
+                } else {
+                    throw new Error('Data was not returned');
+                }
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching game data', error);
+                setError('Could not fetch game data.');
+                setLoading(false);
+            }
+        };
 
-    fetchGameData();
-  }, []);
+        fetchGameData();
+    }, []);
 
-  if (loading) {
-    return <div>Henter data...</div>;
-  }
+    if (loading) {
+        return <div>Loading data...</div>;
+    }
 
-  if (error) {
-    return <div>Fejl: {error}</div>;
-  }
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
-  const renderWinner = (playerName) => {
-    return winner && playerName === winner.name ? <strong> (Vinder!)</strong> : null;
-  };
-
-  return (
-    <div>
-      <h1>Spil Statistik</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Spiller</th>
-            <th>Bets</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {players.map((player, index) => (
-            <tr key={index}>
-              <td>{player.name}{renderWinner(player.name)}</td>
-              <td>{player.bets.map((bet, betIndex) => (
-                <div key={betIndex}>{bet.betType} - ${bet.betAmount.toFixed(2)}</div>
-              ))}</td>
-              <td>${player.balance.toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Game Statistics</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Number</th>
+                        <th>Color</th>
+                        <th>Winner</th>
+                        <th>Bet Amount</th>
+                        <th>Bet Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {games.map((game, index) => (
+                        <tr key={index}>
+                            <td>{game.spiller}</td>
+                            <td>{game.tal}</td>
+                            <td>{game.farve}</td>
+                            <td>{game.vinder || 'No winner'}</td>
+                            <td>{game.betAmount}</td>
+                            <td>{game.betType}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default StatisticsPage;

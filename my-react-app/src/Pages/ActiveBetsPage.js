@@ -10,26 +10,28 @@ function ActiveBetsPage() {
   // Spillerdata fra Game.js sendt via location.state
   const players = location.state ? location.state.players : [];
 
-  // Hent det seneste spilresultat, når komponenten loader
+  // Fetch the latest game result when the component loads
   useEffect(() => {
     const fetchLatestGameResult = async () => {
       try {
-        const response = await fetch('/api/latest-game-result');
+        const response = await fetch('http://localhost:3000/api/latest-game-result');
+        if (!response.ok) {
+          throw new Error('Failed to fetch the latest game result');
+        }
         const result = await response.json();
         setLatestGameResult(result);
       } catch (error) {
-        console.error('Fejl under hentning af det seneste spilresultat:', error);
+        console.error('Error fetching the latest game result:', error);
       }
     };
 
     fetchLatestGameResult();
   }, []);
 
-  // Funktion til at starte spillet
+  // Function to start the game
   const startGame = async () => {
-    // Start spillet og fetch det nye spilresultat
     try {
-      const response = await fetch('/api/start-game', {
+      const response = await fetch('http://localhost:3000/api/start-game', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -40,11 +42,11 @@ function ActiveBetsPage() {
       if (result.gameResult) {
         setLatestGameResult(result.gameResult);
       } else {
-        alert('Der var et problem med at starte spillet.');
+        alert('There was a problem starting the game.');
       }
     } catch (error) {
-      console.error('Fejl ved start af spillet:', error);
-      alert('Kunne ikke starte spillet.');
+      console.error('Error starting the game:', error);
+      alert('Could not start the game.');
     }
   };
 
@@ -63,16 +65,15 @@ function ActiveBetsPage() {
           {players.map((player, index) => (
             <tr key={index}>
               <td>{player.name}</td>
-              <td>{player.currentBet ? `${player.currentBet.betType} - ${player.currentBet.betAmount}` : 'Ingen aktive bets'}</td>
+              <td>{player.currentBet ? `${player.currentBet.betType} - ${player.currentBet.betAmount}` : 'No active bets'}</td>
             </tr>
           ))}
         </tbody>
       </table>
       {latestGameResult && (
         <div className="latest-game-result">
-          <h2>Seneste Spil Resultat:</h2>
-          <p>Vinder: {latestGameResult.vinder}</p>
-          <p>{latestGameResult.farve === 'Rød' ? `Vinderen af rød var: ${latestGameResult.vinder}` : ''}</p>
+          <h2>Latest Game Result:</h2>
+          <p>Winner: {latestGameResult.vinder}</p>
         </div>
       )}
     </div>
