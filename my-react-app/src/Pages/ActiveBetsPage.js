@@ -6,11 +6,9 @@ function ActiveBetsPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [latestGameResult, setLatestGameResult] = useState(null);
-  
-  // Spillerdata fra Game.js sendt via location.state
+
   const players = location.state ? location.state.players : [];
 
-  // Fetch the latest game result when the component loads
   useEffect(() => {
     const fetchLatestGameResult = async () => {
       try {
@@ -28,7 +26,6 @@ function ActiveBetsPage() {
     fetchLatestGameResult();
   }, []);
 
-  // Function to start the game
   const startGame = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/start-game', {
@@ -50,10 +47,20 @@ function ActiveBetsPage() {
     }
   };
 
+  const goToStatistics = () => {
+    navigate('/StatisticsPage');
+  };
+
+  const goToGame = () => {
+    navigate('/game');
+  };
+
   return (
     <div className="active-bets-container">
       <h1>Aktive Bets</h1>
       <button onClick={startGame} className="start-game-button">Start spil</button>
+      <button onClick={goToStatistics} className="view-stats-button">View Statistics</button>
+      <button onClick={goToGame} className="go-to-game-button">Go to Game</button>
       <table className="active-bets-table">
         <thead>
           <tr>
@@ -73,7 +80,9 @@ function ActiveBetsPage() {
       {latestGameResult && (
         <div className="latest-game-result">
           <h2>Latest Game Result:</h2>
-          <p>Winner: {latestGameResult.vinder}</p>
+          <p>Drawn Number: {latestGameResult.drawnNumber}</p>
+          <p>Color: {latestGameResult.color}</p>
+          <p>Winner(s): {latestGameResult.winners ? latestGameResult.winners.join(', ') : 'No winners'}</p>
         </div>
       )}
     </div>
