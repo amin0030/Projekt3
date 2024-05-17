@@ -1,6 +1,6 @@
 const i2c = require('i2c-bus');
 const I2C_BUS_NUMBER = 1;
-const DEVICE_ADDRESS = 0x48;
+const Device_ADDRESS = 0x48;
 
 const bus = i2c.openSync(I2C_BUS_NUMBER);
 
@@ -13,15 +13,14 @@ function sendMessage(){
 
 function receiveMessage(){
     let readBuffer = Buffer.alloc(10);
-    bus.i2cWriteSync(Device_ADDRESS, 10, readBuffer);
+    bus.i2cReadSync(Device_ADDRESS, 10, readBuffer);
     console.log(readBuffer);
-    
+	return readBuffer[1];    
 }
 
 
 // Run Functions:
-sendMessage();
-receiveMessage();
+module.exports = {sendMessage, receiveMessage};
 
 // Close Bus
 bus.closeSync();

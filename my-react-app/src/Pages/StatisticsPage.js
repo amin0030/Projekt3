@@ -9,7 +9,7 @@ function StatisticsPage() {
   useEffect(() => {
     async function fetchGameData() {
       try {
-        const response = await fetch('http://localhost:3000/api/game-data');
+        const response = await fetch('http://10.192.97.237:3001/api/game-data');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

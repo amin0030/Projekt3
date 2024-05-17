@@ -12,7 +12,7 @@ function ActiveBetsPage() {
   useEffect(() => {
     const fetchLatestGameResult = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/latest-game-result');
+        const response = await fetch('http://10.192.97.237:3001/api/latest-game-result');
         if (!response.ok) {
           throw new Error('Failed to fetch the latest game result');
         }
@@ -28,7 +28,7 @@ function ActiveBetsPage() {
 
   const startGame = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/start-game', {
+      const response = await fetch('http://10.192.97.237:3001/api/start-game', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
